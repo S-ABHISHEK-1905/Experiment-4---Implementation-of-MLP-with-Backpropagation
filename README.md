@@ -1,13 +1,15 @@
 # Experiment-4---Implementation-of-MLP-with-Backpropagation
 
-## AIM:
+## AIM :
+
 To implement a Multilayer Perceptron for Multi classification
 
-## EQUIPMENTS REQUIRED:
+## EQUIPMENTS REQUIRED :
+
 Hardware – PCs
 Anaconda – Python 3.7 Installation / Google Colab /Jupiter Notebook
 
-## RELATED THEORETICAL CONCEPT:
+## RELATED THEORETICAL CONCEPT :
 
 A multilayer perceptron (MLP) is a feedforward artificial neural network that generates a set of outputs from a set of inputs. An MLP is characterized by several layers of input nodes connected as a directed graph between the input and output layers. MLP uses back propagation for training the network. MLP is a deep learning method.
 A multilayer perceptron is a neural network connecting multiple layers in a directed graph, which means that the signal path through the nodes only goes one way. Each node, apart from the input nodes, has a nonlinear activation function. An MLP uses backpropagation as a supervised learning technique.
@@ -98,7 +100,7 @@ In the backward pass,
 
 
 
-## ALGORITHM:
+## ALGORITHM :
 
 1.Import the necessary libraries of python.
 
@@ -117,8 +119,77 @@ Normalize our dataset.
 
 8. Finally, call the functions confusion_matrix(), and the classification_report() in order to evaluate the performance of our classifier.
 
-## PROGRAM 
+## PROGRAM :
 
-## OUTPUT 
+### DEVELOPED BY : ABHISHEK S
+### REG NO : 212221230002
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+data=pd.read_csv("/content/IRIS (1).csv")
+data.head()
 
-## RESULT
+name=["sepal_length","sepal_width","petal_length","petal_width"]
+x=data.iloc[:,0:4]
+y=data.select_dtypes(include=[object])
+x.head()
+y.head()
+
+from sklearn import preprocessing
+label_encoder=preprocessing.LabelEncoder()
+data['species']=label_encoder.fit_transform(data['species'])
+data['species'].unique()
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+scaler.fit(x_train)
+x_train=scaler.transform(x_train)
+x_test=scaler.transform(x_test)
+
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
+mlp.fit(x_train,y_train.values.ravel())
+predictions=mlp.predict(x_test)
+print(predictions)
+
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test,predictions))
+``` 
+
+## OUTPUT :
+
+### data.head() :
+
+![image](https://github.com/S-ABHISHEK-1905/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/66360846/f387a7e2-9e47-4d87-91d1-0dbc1a13934e)
+
+### X.head() :
+
+![image](https://github.com/S-ABHISHEK-1905/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/66360846/fc0fab58-2ab5-4418-bf9a-55677d806208)
+
+
+### Y.head() :
+
+![image](https://github.com/S-ABHISHEK-1905/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/66360846/45227425-cbda-4a54-98cb-7a1949225a8d)
+
+### Array :
+
+![image](https://github.com/S-ABHISHEK-1905/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/66360846/7521b1d1-80f6-4f49-a8bb-0370aefa4790)
+
+ ### Printing the predictions :
+
+ ![image](https://github.com/S-ABHISHEK-1905/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/66360846/fec0b495-5914-41b6-9f0a-ea387938dfae)
+
+### Classification report() :
+
+![image](https://github.com/S-ABHISHEK-1905/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/66360846/29e75d71-7cdf-4c75-9319-88d3e60d5078)
+
+![image](https://github.com/S-ABHISHEK-1905/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/66360846/471c756a-9812-4fef-9eaf-b90a4040c5e2)
+
+
+## RESULT :
+
+Thus Implementation-of-MLP-with-Backpropagation problem is executed successfully.
